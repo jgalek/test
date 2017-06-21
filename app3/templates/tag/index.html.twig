@@ -1,0 +1,22 @@
+{% include 'default/_paginator.html.twig' with {
+paginator: paginator,
+route_name: 'tag_index_paginated',
+} %}
+
+<h1>
+    Tagi
+</h1>
+
+{%  if paginator.data|length %}
+    <ul>
+        {% for row in paginator.data %}
+            <li>{{ row.id|upper }}, {{ row.name }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <p>
+        Records not found!
+    </p>
+{% endif %}

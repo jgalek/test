@@ -1,0 +1,181 @@
+
+    public function addAction(Application $app, Request $request)
+    {
+
+        dump($request->get('autor'));
+        dump($request->get('tytul'));
+        $wyszukiwarkaRepository = new WyszukiwarkaRepository($app['db']);
+
+        {
+            $wyszukiwarka = [];
+            $tytul = $request->get('tytul');
+            $autor = $request->get('autor');
+
+            $form = $app['form.factory']->createBuilder(WyszukiwarkaType::class, $wyszukiwarka)->getForm();
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $wyszukiwarka = $form->getData();
+                dump($wyszukiwarka);
+            }
+
+            return $app['twig']->render(
+                'wyszukiwarka/sresult.html.twig',
+                [
+                    'autor' => $autor,
+                    'tytul' => $tytul,
+                    'wyszukiwarka' => $wyszukiwarkaRepository->findAll($autor, $tytul),
+                ]
+            );
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <form style="margin:5px, padding:5px" class="form-horizontal" role="form">
+                        <h4>Dane do profilu:</h4>
+                        <div class="form-group">
+                            <label for="imie" class="col-sm-2 control-label">Imie</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="imie" placeholder="Podaj swoje imie">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nazwisko" class="col-sm-2 control-label">Nazwisko</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nazwisko" placeholder="Podaj swoje nazwisko">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pseudonim" class="col-sm-2 control-label">Pseudonim</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="pseudonim" placeholder="Podaj swój pseudonim">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_ur" class="col-sm-2 control-label">Data urodzenia</label>
+                            <div class="col-sm-10">
+                                <input type="datetime" class="form-control" id="data_ur" placeholder="Podaj datę urodzenia">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="wiek" class="col-sm-2 control-label">Wiek</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="wiek" placeholder="Podaj swój wiek">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Podaj adres email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Hasło</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="Twoje tajne hasło">
+                            </div>
+                        </div>
+                        <h3>Dodatkowe:</h3>
+                        <div class="form-group">
+                            <label for="tagi" class="col-sm-2 control-label">Tagi</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tagi" placeholder="Podaj tagi">
+                            </div>
+                        </div>
+                        <h4>Preferencje:</h4>
+                        <div class="form-group">
+                            <label for="gatunek" class="col-sm-2 control-label">Gatunek</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="gatunek" placeholder="Ulubiony gatunek">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tematyka" class="col-sm-2 control-label">Tematyka</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tematyka" placeholder="Tematyka utworów">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ulubiony_autor" class="col-sm-2 control-label">Ulubiony autor</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="ulubiony_autor" placeholder="Podaj autora">
+                            </div>
+                        </div>
+                        <h4>Napisz coś o sobie:</h4>
+                        <div class="form-group">
+                            <label for="info" class="col-sm-2 control-label">Informacje o Tobie</label>
+                            <div class="col-sm-10">
+                                <input type="TextType" class="form-control" id="info" placeholder="O mnie">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-5">
+                                <button type="submit" class="btn btn-default"> Utwórz konto</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+    public function addAction(Application $app, Request $request)
+    {
+        dump($request->get('tresc'));
+        $play = [];
+
+        $form = $app['form.factory']->createBuilder(PlayType::class, $play)->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $playRepository = new PlayRepository($app['db']);
+            $playRepository->save($form->getData());
+
+            $app['session']->getFlashBag()->add(
+                'messages',
+                [
+                    'type' => 'success',
+                    'message' => 'message.element_successfully_added',
+                ]
+            );
+
+            return $app->redirect($app['url_generator']->generate('play_index'), 301);
+        }
+        dump($app);
+
+
+        return $app['twig']->render(
+            'play/add.html.twig',
+            [
+                'play' => $play,
+                'form' => $form->createView(),
+            ]
+        );
+    }

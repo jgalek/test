@@ -1,0 +1,13 @@
+#box{
+    display: block;
+    position: absolute;
+    width: 36%;
+    top: 450px;
+    left: 36%;
+    background-color: lightgrey;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: x-large;
+    text-align: center;
+}

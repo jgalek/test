@@ -1,0 +1,105 @@
+{% extends 'baseHearIt.html.twig' %}
+{% block body %}
+    {% block header %}
+        <div class="mp container navbar navbar-default">
+            <div class="container-fluid">
+                <div class="row">
+                    <div style="margin:5px, padding:5px" class="list-group col-md-3 col-md-offset-1">
+                        <a class="list-group-item" href="../hearIt"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+                        <a class="list-group-item" href="../playlisty"><i class="fa fa-play fa-fw"></i>&nbsp; Playlisty</a>
+                        <a class="list-group-item" href="../rankingi"><i class="fa fa-trophy fa-fw"></i>&nbsp; Rankingi</a>
+                    </div>
+                    <div style="color:darkslateblue" class="col-md-3 col-md-offset-0">
+                        <h1>HearIt!</h1>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <div class="container-fluid">
+                            <div class="btn-group pull-right" role="group" aria-label="{{ 'label.actions'|trans }}">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <h4>Zalogowano jako:
+                                        {% for row in profil %}
+                                            {{ row.pseudonim }}
+                                        {% endfor %}
+                                    </h4>
+                                    <a class="list-group-item text-center" id="logout" href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'auth.logout.label'|trans }}
+                                    </a>
+                                    <a class="mp list-group-item text-center" href="../profil"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profil</a>
+
+                                {% else %}
+                                    <a class="mp list-group-item text-center " href="{{ url('auth_login') }}"  title="{{ 'auth.login.label'|trans }}">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'auth.login.label'|trans }}
+                                    </a>
+                                    <a class="mp list-group-item text-center" href="../register/add"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Zarejestruj się</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <form class="col-md-10 col-md-offset-1 form-horizontal" role="form" action="{{ url('wyszukiwarka_sresult') }}" method="get">
+                        <div class="form-group">
+                            {#  form_start(form, { method: 'post', action: url('tag_add') }) #}
+                            {#  form_widget(form) #}
+                            <input type="text" class="form-control" id="autor" name="autor" placeholder="search HearIt">
+                        </div>
+                        {#  form_end(form) #}
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+    <div class="container ">
+        <div class="row navbar navbar-default">
+
+    {% form_theme form with ['bootstrap_3_horizontal_layout.html.twig', 'form/form_errors.html.twig'] %}
+
+    <h2 style="color:darkslateblue">{{ 'title.video_add'|trans }}</h2>
+
+    {% if false == form.vars.valid %}
+        {% include 'default/_single_alert_message.html.twig' with {
+        is_single_message: true,
+        is_dismissible: false,
+        type: 'danger',
+        message: 'message.form_error',
+        } %}
+    {% endif %}
+        <div class="mp col-md-11">
+        {{ form_start(form, { method: 'post', action: url('video_add') }) }}
+        {{ form_widget(form) }}
+            <div class="mp col-md-offset-3" role="group">
+        <input type="submit" value="{{ 'action.save'|trans }}" class="form-group btn btn-default" />
+            </div>
+        {{ form_end(form) }}
+        <div role="group" aria-label="{{ 'label.actions'|trans }}">
+            <a href="{{ url('profil_index') }}" title="{{ 'label.back_to_list'|trans }}" class="btn btn-default">
+                <span class="fa fa-mail-reply" aria-hidden="true"></span>
+                {{ 'label.back_to_list'|trans }}
+            </a>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+       <div class="mp container navbar navbar-default">
+        <div class="container-fluid">
+            <h2 style="color:darkslateblue" >Usuń wideo:</h2>
+            <div class="row">
+                {% for row in userVideo %}
+                    <div style="margin:5px, padding:5px" class="col-md-6 ">
+                        <a style="color:darkslateblue" class="list-group-item" href="../video/{{ row.video_id }}/delete"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;{{ row.tytul|upper }}</a>
+                        <div class="mp">
+                            <div class="list-group-item"><i class="fa fa-star" aria-hidden="true"></i>&nbsp; Ocena: {{ row.ocena }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="col-md-6 col-md-offset-5">
+                    <button class="btn btn-inverse btn-lg">Pokarz więcej</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

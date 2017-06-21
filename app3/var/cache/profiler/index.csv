@@ -1,0 +1,9 @@
+ea5021,::1,POST,http://localhost:8888/index_dev.php/auth_login_check,1497993344,,302
+c2c197,::1,GET,http://localhost:8888/index_dev.php/auth/login,1497993349,,200
+3e429b,::1,POST,http://localhost:8888/index_dev.php/auth_login_check,1497993411,,500
+59c4ea,::1,GET,http://localhost:8888/index_dev.php/auth/login,1497994435,,200
+5a131f,::1,POST,http://localhost:8888/index_dev.php/auth_login_check,1497994447,,500
+5f3f29,::1,GET,http://localhost:8888/index_dev.php/auth/login,1497994745,,200
+a0f79f,::1,POST,http://localhost:8888/index_dev.php/auth_login_check,1497994755,,500
+f3cadc,::1,GET,http://localhost:8888/index_dev.php/,1497995390,,500
+28e5fd,::1,GET,http://localhost:8888/index_dev.php/hearIt/,1497995409,,200

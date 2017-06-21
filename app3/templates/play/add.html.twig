@@ -1,0 +1,15 @@
+{% extends 'baseHearIt.html.twig' %}
+{% block body %}
+<div class="container">
+    {{ form_start(form, { class:'mp row navbar navbar-default', method: 'post', action: url('play_add', {'id': id}) }) }}
+    {{ form_widget(form) }}
+    <input type="text" class="form-control" id="tresc" name="tresc" placeholder="Twój komentarz">
+    <input type="number" class="form-control" id="ocena" name="ocena" placeholder="Twoja ocena">
+    <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-success" />
+    {{ form_end(form) }}
+    <a href="{{ url('play_index', {'id': id}) }}" title="{{ 'label.back_to_list'|trans }}" class="btn btn-default">
+        <span class="fa fa-mail-reply" aria-hidden="true"></span>
+        {{ 'label.back_to_list'|trans }}
+    </a>
+</div>
+{% endblock %}
