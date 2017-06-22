@@ -1,0 +1,21 @@
+<h1>
+    {{ 'title.bookmarks_list'|trans }}
+</h1>
+
+{%  if bookmarks|length %}
+<ul>
+    {% for row in bookmarks %}
+        <li>{{ row.title|upper }}, {{ row.url }}
+
+            <a href="{{ url('bookmark_index') }}" title="{{ 'label.back_to_list'|trans }}">
+                {{ 'label.back_to_list'|trans }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<p>
+    Records not found!
+</p>
+{% endif %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.tag_add'|trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.tag_delete'|trans }}</h1>
+    {{ form_start(form, { method: 'post', action: url('tag_add' ) }) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ 'action.add'|trans }}" class="btn btn-success" />
+    {{ form_end(form) }}
+    <a href="{{ url('tag_index') }}" title="{{ 'label.back_to_list'|trans }}" class="btn btn-default">
+        <span class="fa fa-mail-reply" aria-hidden="true"></span>
+        {{ 'label.back_to_list'|trans }}
+    </a>
+{% endblock %}
