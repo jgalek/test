@@ -1,0 +1,117 @@
+{% extends 'baseHearIt.html.twig' %}
+{% block body %}
+    {% block header %}
+        <div class="mp container navbar navbar-default">
+            <div class="container-fluid">
+                <div class="row">
+                    <div style="margin:20px, padding:5px" class="list-group col-md-3 col-md-offset-1">
+                        <a class="list-group-item" href="../hearIt"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+                        <a class="list-group-item" href="../playlisty"><i class="fa fa-play fa-fw"></i>&nbsp; Playlisty</a>
+                        <a class="list-group-item" href="../rankingi"><i class="fa fa-trophy fa-fw"></i>&nbsp; Rankingi</a>
+                    </div>
+                    <div class="col-md-3 col-md-offset-0">
+                        <h1>HearIt!</h1>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <div class="container-fluid">
+                            <div class="btn-group pull-right" role="group" aria-label="{{ 'label.actions'|trans }}">
+                                <h4>Zalogowano jako:
+                                    {% for row in profil %}
+                                        {{ row.pseudonim }}
+                                    {% endfor %}
+                                </h4>
+                                <a class="list-group-item" id="logout" href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'auth.logout.label'|trans }}
+                                </a>
+                                <a class="list-group-item" href="../video"><i class="fa fa-plus" aria-hidden="true"></i>/<i class="fa fa-minus" aria-hidden="true"></i> Dodaj lub usuń wideo</a>
+                                <a class="list-group-item" href="../register/edit"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Edytuj</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="mp col-md-10 col-md-offset-1 form-horizontal" role="form" action="{{ url('wyszukiwarka_sresult') }}" method="get">
+                        <div class="form-group">
+                            {#  form_start(form, { method: 'post', action: url('tag_add') }) #}
+                            {#  form_widget(form) #}
+                            <input type="text" class="form-control" id="autor" name="autor" placeholder="search HearIt">
+                        </div>
+                        {#  form_end(form) #}
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    <div class="container ">
+        <div class="row navbar navbar-default">
+                {% for row in profil %}
+                    <h2 style="color:darkslateblue">{{ row.pseudonim|upper }}</h2>
+                {% endfor %}
+        </div>
+    </div>
+    <div class="container ">
+        <div class="mp row navbar navbar-default">
+            <h3 style="color:darkslateblue" >O mnie: </h3>
+            <p>
+                {% for row in profil %}
+                    {{ row.info }}
+                {% endfor %}</p>
+        </div>
+    </div>
+        <div class="mp container navbar navbar-default">
+             <div class="container-fluid">
+                 <h2 style="color:darkslateblue" >Widea użytkownika:</h2>
+                 <div class="row">
+                     {% for row in userVideo %}
+                         <div style="margin:5px, padding:5px" class="mp">
+                             <a style="color:darkslateblue" class="list-group-item" href="../play/{{ row.video_id }}"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;{{ row.tytul|upper }}</a>
+                         </div>
+                     {% endfor %}
+                 </div>
+             </div>
+        </div>
+
+
+    <div class="container ">
+        <div class="row navbar navbar-default">
+            <h2 style="color:darkslateblue" >Playlisty użytkownika:</h2>
+        </div>
+    </div>
+
+
+    {% for row in userPlaylist %}
+        <div class="mp container navbar navbar-default">
+            <div class="container-fluid">
+                <div class="mp list-group-item"><h3>{{ row.nazwa|upper}}</h3></div>
+                <div class="mp row">
+                {% for row in userPlaylist %}
+                    <div style="margin:5px, padding:5px" class="col-md-6 ">
+                        <div class="mp list-group-item"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Autor: {{ row.pseudonim }} </div>
+                        <div class="mp">
+                            <a style="color:darkslateblue" class="list-group-item" href="../play/{{ row.video_id }}"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;{{ row.tytul|upper }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="mp container navbar navbar-default">
+            <div class="container-fluid">
+        <h2 style="color:darkslateblue" >Rankingi użytkownika:</h2>
+            <div class="mp row">
+                {% for row in userHighestScore %}
+                    <div style="margin:5px, padding:5px" class="col-md-6 ">
+                        <a style="color:darkslateblue" class="list-group-item" href="../play/{{ row.video_id }}"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;{{ row.tytul|upper }}</a>
+                        <div class="mp">
+                            <div class="list-group-item"><i class="fa fa-star" aria-hidden="true"></i>&nbsp; Ocena: {{ row.ocena }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="col-md-6 col-md-offset-5">
+                    <button class="btn btn-inverse btn-lg">Pokaż więcej</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        {% endblock %}

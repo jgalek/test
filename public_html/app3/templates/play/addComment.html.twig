@@ -1,0 +1,11 @@
+<div class="mp container navbar navbar-default">
+    {% form_theme form with ['bootstrap_3_horizontal_layout.html.twig', 'form/form_errors.html.twig'] %}
+    {{ form_start(form, { class:'mp form-control row navbar navbar-default', method: 'post', action: url('play_add', {'id': id}) }) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ 'action.save'|trans }}" class="col-md-offset-3 mp btn btn-default" />
+    {{ form_end(form) }}
+    <a href="{{ url('play_index', {'id': id}) }}" title="{{ 'label.back_to_list'|trans }}" class="btn btn-default">
+        <span class="fa fa-mail-reply" aria-hidden="true"></span>
+        {{ 'label.back_to_list'|trans }}
+    </a>
+</div>

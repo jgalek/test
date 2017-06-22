@@ -1,0 +1,12 @@
+<h1>
+    Bookmark
+</h1>
+{% if bookmarks|length %}
+    <div>
+        {{ bookmarks.title|upper }}, {{ bookmarks.url }}
+    </div>
+{% else %}
+    <div>
+        No bookmark found!
+    </div>
+{% endif %}

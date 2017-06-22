@@ -1,0 +1,44 @@
+<div class="mp container navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div style="margin:5px, padding:5px" class="list-group col-md-3 col-md-offset-1">
+                <a class="list-group-item" href="../hearIt"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+                <a class="list-group-item" href="../playlisty"><i class="fa fa-play fa-fw"></i>&nbsp; Playlisty</a>
+                <a class="list-group-item" href="../rankingi"><i class="fa fa-trophy fa-fw"></i>&nbsp; Rankingi</a>
+            </div>
+            <div style="color:darkslateblue" class="col-md-3 col-md-offset-0">
+                <h1>HearIt!</h1>
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+                <div class="container-fluid">
+                    <div class="btn-group pull-right" role="group" aria-label="{{ 'label.actions'|trans }}">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <h4>Zalogowano jako:
+                                {% for row in profil %}
+                                    {{ row.pseudonim }}
+                                {% endfor %}
+                            </h4>
+                            <a class="mp list-group-item text-center" href="{{ url('auth_logout') }}" title="{{ 'auth.logout.label'|trans }}">
+                                <i class="fa fa-sign-out fa-fw"></i>&nbsp;{{ 'auth.logout.label'|trans }}
+                            </a>
+                            <a class="mp list-group-item text-center" href="../profil"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profil</a>
+                        {% else %}
+                            <a class="mp list-group-item text-center " href="{{ url('auth_login') }}"  title="{{ 'auth.login.label'|trans }}">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'auth.login.label'|trans }}
+                            </a>
+                            <a class="mp list-group-item text-center" href="../register/add"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Zarejestruj się</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <form class="col-md-10 col-md-offset-1 form-horizontal" role="form" action="{{ url('wyszukiwarka_sresult') }}" method="get">
+                <div class="form-group">
+                    {#  form_start(form, { method: 'post', action: url('tag_add') }) #}
+                    {#  form_widget(form) #}
+                    <input type="text" class="form-control" id="autor" name="autor" placeholder="search HearIt">
+                </div>
+                {#  form_end(form) #}
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="title.bookmarks_list">
+                <source>title.bookmarks_list</source>
+                <target>Bookmarks List</target>
+            </trans-unit>
+            <trans-unit id="title.auth_login">
+                            <source>title.auth_login</source>
+                            <target>Log In</target>
+             </trans-unit>
+             <trans-unit id="action.login">
+                                         <source>action.login</source>
+                                         <target>Zaloguj</target>
+                          </trans-unit>
+        </body>
+    </file>
+</xliff>

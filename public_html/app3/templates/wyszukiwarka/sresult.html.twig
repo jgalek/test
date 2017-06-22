@@ -1,0 +1,17 @@
+{% extends 'baseHearIt.html.twig' %}
+{% block body %}
+    {% block header %}{% include 'header.html.twig' %}{% endblock %}
+    <div class="mp container navbar navbar-default">
+    <div class="container-fluid">
+    <h2>Wyszukano:</h2>
+    <div class="row">
+    {% for row in wyszukiwarka %}
+        <div style="margin:5px, padding:5px" class="col-md-6 ">
+            <div class="list-group-item"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Autor {{ row.pseudonim|upper }}</div>
+            <a  style="color:darkslateblue" class="list-group-item" href="../play/{{  row.video_id }}"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;{{ row.tytul|upper }} ({{ row.gatunek }} {{ row.tagi }} {{ row.temat }})</a>
+            <div class="list-group-item"><i class="fa fa-star" aria-hidden="true"></i>&nbsp; Ocena: {{ row.ocena }}</div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

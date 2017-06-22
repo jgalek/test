@@ -1,0 +1,15 @@
+{% for row in play %}
+    <div class="mp container navbar navbar-default">
+        <div class="container-fluid">
+            <h2>{{ row.pseudonim }} <br>
+                <div style="color:darkslateblue">{{ row.tytul|upper }}</div>
+                <div class="mp row">
+                    <div style="margin:5px, padding:5px" class="mp center-block">
+                        <embed src='/video/{{ row.video }}' autostart="false" width="750" height="515" frameborder="0" allowfullscreen/>
+                        <div class="list-group-item"><i class="fa fa-star" aria-hidden="true"></i>&nbsp; Ocena: {{ row.ocena }}</div>
+                    </div>
+                </div>
+            </h2>
+        </div>
+    </div>
+{% endfor %}
