@@ -1,0 +1,25 @@
+<div class="container ">
+    <div class="row navbar navbar-default">
+        <h2 style="color:darkslateblue" >Komentarze:</h2>
+    </div>
+</div>
+
+{% for row in comments %}
+    <div class="mp container navbar navbar-default">
+        <div class="container-fluid">
+            <div class="mp row">
+                <div style="margin:5px, padding:5px" class="mp center-block">
+                    <p><h4><div style="color:darkslateblue">{{ row.pseudonim|upper }} </div></h4>
+                    <div class="mp"> {{ row.tresc }}</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<div class="mp container navbar navbar-default">
+    <div style="margin:5px, padding:5px" class="col-md-6 col-md-offset-3 ">
+        <div class="mp text-center">
+            <a class="list-group-item" href="{{ url('play_add', {'id': id}) }}" title="{{ 'label.back_to_list'|trans }}"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; {{ 'label.add_comment_or_note'|trans }}</a>
+        </div>
+    </div>
+</div>

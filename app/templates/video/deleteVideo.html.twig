@@ -1,0 +1,12 @@
+<div class="mp container navbar navbar-default">
+    <div class="container-fluid">
+        <h2 style="color:darkslateblue" >Usuń wideo:</h2>
+        <div class="row">
+            {% for row in userVideo %}
+                <div style="margin:5px, padding:5px" class="col-md-6 ">
+                    <a style="color:darkslateblue" class="list-group-item" href="../video/{{ row.video_id }}/delete"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;{{ row.tytul|upper }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container ">
+    <div style="color:darkslateblue" class="row navbar navbar-default">
+        <h2>Proponowane:</h2>
+    </div>
+</div>
+
+
+{% for row in playlist %}
+    <div class="mp container navbar navbar-default">
+        <div class="container-fluid">
+            <div class="mp list-group-item"><h3>Playlista: {{ row.gatunek|upper}}</h3></div>
+            {% for row in playlistByGatunek %}
+                <div class="mp row">
+                    <div style="margin:5px, padding:5px" class="mp">
+                        {{  row.gatunek }}
+                        <a  style="color:darkslateblue" class="list-group-item" href="../play/{{  row.video_id }}"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;{{ row.tytul|upper }}</a>
+                        <div class="list-group-item"><i class="fa fa-star" aria-hidden="true"></i>&nbsp; Ocena: {{ row.ocena }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
